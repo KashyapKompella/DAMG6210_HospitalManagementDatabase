@@ -149,6 +149,17 @@ INSERT INTO DOCTOR_SCHEDULE VALUES('2021-11-22 12:00:00', 'Available',4001);
 
 SELECT * FROM DOCTOR_SCHEDULE
 
+-- Enter the doctor's first and last name to get the doctor's schedule appointment
+USE HOSPITAL_MANAGEMENT
+GO
+CREATE PROCEDURE GetDOCTORSHEDULE @FirstName VARCHAR(30), @Lastname VARCHAR(30) AS
+BEGIN
+    SELECT d.DOCTOR_ID, d.FIRST_NAME, d.LAST_NAME, ds.DOCSCHEDULE_ID, ds.SCHEDULE_DATE, ds.SCHEDULE_STATUS
+    FROM Doctor d JOIN DOCTOR_SCHEDULE ds ON d.DOCTOR_ID = ds.DOCTOR_ID
+    WHERE FIRST_NAME = @FirstName AND LAST_NAME = @Lastname
+END;
+
+EXEC GetDOCTORSHEDULE 'Temple','Wisoky';
 
 
 /*SQL Script to create table structure for Lab*/
